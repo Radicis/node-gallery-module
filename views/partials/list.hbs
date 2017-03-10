@@ -1,0 +1,9 @@
+<div clas="row">
+    <div class="col-md-12 list">
+        {{#each collection}}
+            {{#if this.thumbnailUrl}}
+                <img class="list-images" src="{{this.thumbnailUrl}}" alt="{{this.title}}">
+            {{/if}}
+        {{/each}}
+    </div>
+</div>

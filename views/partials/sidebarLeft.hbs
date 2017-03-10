@@ -1,0 +1,12 @@
+{{#each sidebarLeft.modules}}
+    {{#if this.title}}
+        <div class="row">
+            {{this.title}}
+        </div>
+    {{/if}}
+    {{#if this.content}}
+        <div cass="row">
+            {{{this.content}}}
+        </div>
+    {{/if}}
+{{/each}}
