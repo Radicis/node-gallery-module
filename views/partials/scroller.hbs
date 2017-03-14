@@ -7,7 +7,7 @@
             {{/if}}
             <form class="filter" onsubmit="return false;">
                 <input class="form-control" type="text" id="search" placeholder="Search.." />
-                {{#if displayFilterCheckboxes}}
+                {{#if displayButtons}}
                     <div class="form-group badge-checkboxes">
                         {{#each properties}}
                             <div class="checkbox">
@@ -18,8 +18,6 @@
                             </div>
                         {{/each}}
                     </div>
-                {{/if}}
-                {{#if displayFilterButtons}}
                     <div class="buttons">
                         <button type="button" class="btn btn-xs" data-sort="random">Randomize</button>
                         {{#each properties}}
@@ -29,7 +27,7 @@
                 {{/if}}
             </form>
         </div>
-        <br>
+
         <div class="container" data-ref="container" id="collage">
 
         </div>

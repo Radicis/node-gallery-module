@@ -15,16 +15,16 @@
             <div class="form-group row">
                 <div class="col-md-6">
                     <label>Collection Title:</label>
-                    <input class="form-control" name="collectionTitle" type="text" value="{{schema.collectionTitle}}" required />
+                    <input class="form-control" name="collectionTitle" type="text" value="{{schema.collectionTitle}}"  />
                     <p class="form-text text-muted">
                         The title for this collection.
                     </p>
                 </div>
                 <div class="col-md-6">
                     <label>Collection Logo URL:</label>
-                    <input class="form-control" name="brandUrl" type="text" value="{{schema.brandUrl}}" required />
+                    <input class="form-control" name="brandUrl" type="text" value="{{schema.brandUrl}}" />
                     <p class="form-text text-muted">
-                       The url for the logo for this collection
+                        The url for the logo for this collection
                     </p>
                 </div>
             </div>
@@ -70,8 +70,43 @@
                         Object property you wish to represent the date
                     </p>
                 </div>
+
+                <div class="col-md-6">
+                    <label>Object Count:</label>
+                    <input class="form-control" name="itemCount"  value="{{schema.itemCount}}" type="number"/>
+                    <p class="form-text text-muted">
+                        Number of objects to be pulled at once from the database
+                    </p>
+                </div>
+
             </div>
             <hr>
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label>Colour Scheme:</label><br>
+                    <label class="radio-inline"><input name="dark"  value="1" type="radio" {{#if schema.dark}}checked="checked"{{/if}}>Dark</label>
+                    <label class="radio-inline"> <input name="dark"  value="0" type="radio" {{#unless schema.dark}}checked="checked"{{/unless}}>Light</label>
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <label>Display Collection title:</label><br>
+                    <label class="radio-inline"><input name="showTitle"  value="1" type="radio" {{#if schema.showTitle}}checked="checked"{{/if}}>Yes</label>
+                    <label class="radio-inline"> <input name="showTitle"  value="0" type="radio" {{#unless schema.showTitle}}checked="checked"{{/unless}}>No</label>
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <label>Display Meta Data in Lightbox:</label><br>
+                    <label class="radio-inline"><input name="showMeta"  value="1" type="radio" {{#if schema.showMeta}}checked="checked"{{/if}}>Yes</label>
+                    <label class="radio-inline"><input name="showMeta"  value="0" type="radio" {{#unless schema.showMeta}}checked="checked"{{/unless}}>No</label>
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <label>Display Control Buttons:</label><br>
+                    <label class="radio-inline"><input name="showButtons"  value="1" type="radio" {{#if schema.showButtons}}checked="checked"{{/if}}>Yes</label>
+                    <label class="radio-inline"><input name="showButtons"  value="0" type="radio" {{#unless schema.showButtons}}checked="checked"{{/unless}}>No</label>
+                </div>
+
+            </div>
 
             <div class="row">
                 <div class="col-md-12">

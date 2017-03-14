@@ -7,35 +7,25 @@ var request = require('request');
 router.get('/', function(req, res) {
 
     request('http://localhost:3030/object/random', function (error, response, body) {
-         if (!error && response.statusCode == 200) {
-             var context = {};
 
-             var responseBody = JSON.parse(body);
+        if (!error && response.statusCode == 200) {
+            var context = {};
 
-             var object = responseBody.object;
+            var responseBody = JSON.parse(body);
 
-             // get all relevant keys form the object to display as filters
-             context.properties = helpers.getKeys(object);
+            var object = responseBody.object;
 
-             context.title = responseBody.title;
+            // get all relevant keys form the object to display as filters
+            context.properties = helpers.getKeys(object);
 
-             console.log(responseBody);
-
-             // Set up config variables
-             context.displayCollectionTitle = config.displayCollectionTitle;
-             context.displayFilterCheckboxes = config.displayFilterCheckboxes;
-             context.displayFilterButtons = config.displayFilterButtons;
-             context.displayMetaDataOnLightBox = config.displayMetaDataOnLightBox;
-             context.itemCount = config.itemCount;
-
+            context.title = responseBody.collectionTitle;
+            context.dark = responseBody.dark;
+            context.displayButtons = responseBody.showButtons;
+            context.displayMetaDataOnLightBox = responseBody.showMeta;
+            context.displayCollectionTitle  = responseBody.showTitle;
+            context.itemCount = responseBody.itemCount;
             res.render('default', context);
-         }
-    });
-});
-
-router.get('/setup', function(err, data){
-    helpers.createDummyData().then(function(field){
-        console.log("Dummy Data created!");
+        }
     });
 });
 

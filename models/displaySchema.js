@@ -25,42 +25,56 @@ var DisplaySchemaSchema = mongoose.Schema({
     url: {
         type: String
     },
-    footnote: {
-        type: String
-    },
     date: {
         type: String
+    },
+    dark:{
+        type:Boolean,
+        default:true
+    },
+    showMeta:{
+        type:Boolean,
+        default:true
+    },
+    showTitle:{
+        type:Boolean,
+        default:true
+    },
+    showButtons:{
+        type:Boolean,
+        default:true
+    },
+    itemCount:{
+        type:Number,
+        default:24
     }
 });
 
 var DisplaySchema = module.exports = mongoose.model('DisplaySchema', DisplaySchemaSchema);
 
-module.exports.getAll = function(callback, limit){
-    return DisplaySchema.find().limit(limit).exec(callback);
-};
-
-module.exports.getById = function(id, callback){
-    console.log("Getting by id");
-    DisplaySchema.findOne({_id: id})
-        .exec(callback);
-};
-
 module.exports.getFirst = function(callback){
-    return DisplaySchema.find().limit(1).populate('customFields').exec(callback);
-};
-
-module.exports.getByCollectionName = function(collectionName, callback){
-    console.log("Getting by collection name: " + collectionName);
-    DisplaySchema.findOne({collectionName: collectionName}).exec(callback);
+    return DisplaySchema.findOne().exec(callback);
 };
 
 module.exports.add = function(schema, callback){
-    console.log('Creating new schema..');
     DisplaySchema.create(schema, callback);
 };
 
 module.exports.update = function(schema, callback){
-    console.log("Updating details id: " + schema._id);
-    DisplaySchema.findOneAndUpdate({_id:schema._id}, {title:schema.title, collectionTitle: schema.collectionTitle, brandUrl: schema.brandUrl, collectionName: schema.collectionName, url: schema.url, thumbnail: schema.thumbnail, fullSize: schema.fullSize, date: schema.date, customFields:schema.customFields}, { new: false }, callback);
+    DisplaySchema.findOneAndUpdate({_id:schema._id}, {
+        title:schema.title,
+        collectionTitle: schema.collectionTitle,
+        brandUrl: schema.brandUrl,
+        collectionName: schema.collectionName,
+        url: schema.url,
+        thumbnail: schema.thumbnail,
+        fullSize: schema.fullSize,
+        date: schema.date,
+        dark:schema.dark,
+        showTitle: schema.showTitle,
+        showMeta: schema.showMeta,
+        showButtons: schema.showButtons,
+        itemCount: schema.itemCount
+    }, { new: false }, callback);
 };
 

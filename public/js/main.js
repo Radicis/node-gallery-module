@@ -51,7 +51,7 @@ var extJs = function(itemCount, displayMetaDataOnLightBox) {
     var CreateMix = function () {
 
         var params = {
-            count: 24,
+            count: itemCount,
             search: searchString,
             skip: 0
         };
@@ -80,33 +80,36 @@ var extJs = function(itemCount, displayMetaDataOnLightBox) {
 
             var collage = $('#collage');
 
-            // Destroy existing mixitup instance if exists
-            try {
-                collage.mixItUp('destroy');
-            }
-            catch (err) {
-            }
+            if(data.length>0) {
 
-            var container = document.querySelector('[data-ref="container"]');
-
-            data.forEach(function (item) {
-                var html = '<a class="mix" data-date="' + item.date;
-                if(displayMetaDataOnLightBox==true) {
-                    html += '" data-title="' + item.title + ' - ' + item.date;
+                // Destroy existing mixitup instance if exists
+                try {
+                    collage.mixItUp('destroy');
                 }
-                html+= '" data-lightbox="items" data-ref="item" data-lightbox="' + item._id + '"' +
-                    ' href="' + item.thumbnail.slice(0, -5) + "10.jpg" + '"><img src="' +
-                    item.thumbnail + '" data-bg="' + item.thumbnail +
-                    '" data-title="' + item.title + '"/></a>';
-                collage.append(html);
-            });
-
-            mixitup(container, {
-                animation: {
-                    animateResizeContainer: false,
-                    effects: 'fade rotateX(-45deg) translateY(-10%)'
+                catch (err) {
                 }
-            });
+
+                var container = document.querySelector('[data-ref="container"]');
+
+                data.forEach(function (item) {
+                    var html = '<a class="mix" data-date="' + item.date;
+                    if (displayMetaDataOnLightBox == true) {
+                        html += '" data-title="' + item.title + ' - ' + item.date;
+                    }
+                    html += '" data-lightbox="items" data-ref="item" data-lightbox="' + item._id + '"' +
+                        ' href="' + item.thumbnail.slice(0, -5) + "10.jpg" + '"><img src="' +
+                        item.thumbnail + '" data-bg="' + item.thumbnail +
+                        '" data-title="' + item.title + '"/></a>';
+                    collage.append(html);
+                });
+
+                mixitup(container, {
+                    animation: {
+                        animateResizeContainer: false,
+                        effects: 'fade rotateX(-45deg) translateY(-10%)'
+                    }
+                });
+            }
 
             var loadMore = $('#load-more');
 

@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var helpers = require('../middleware/helpers');
-var config = require('../config/config');
 var DisplaySchema = require('../models/displaySchema');
 // Connect to MongoDb
 var mongoose = require('mongoose');
@@ -12,16 +11,18 @@ router.get('/random', function(req, res) {
     var context = {};
 
     try {
+        // Gets the first display schema from the collection to map the object properties and settings
+        DisplaySchema.getFirst(function (err, displaySchema) {
 
-        DisplaySchema.getByCollectionName(config.collectionName, function (err, displaySchema) {
             if (err) {
                 res.json(err);
             }
 
+
             try {
 
                 var collection = db.collection(displaySchema.collectionName);
-                var count = 30000;
+                var count = collection.count();
                 var rand = Math.floor(Math.random() * count);
                 collection.find({thumbnail: {$ne: ""}}, {limit: 1}).skip(rand).toArray(function (error, objects) {
                     if (err) {
@@ -37,7 +38,12 @@ router.get('/random', function(req, res) {
                         date: object[displaySchema.date]
                     };
 
-                    context.title = displaySchema.collectionTitle;
+                    context.collectionTitle = displaySchema.collectionTitle;
+                    context.dark = displaySchema.dark;
+                    context.showButtons = displaySchema.showButtons;
+                    context.showMeta = displaySchema.showMeta;
+                    context.showTitle = displaySchema.showTitle;
+                    context.itemCount = displaySchema.itemCount;
 
                     res.json(context);
                 });
@@ -53,9 +59,8 @@ router.get('/random', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-
     try {
-        DisplaySchema.getByCollectionName(config.collectionName, function (err, displaySchema) {
+        DisplaySchema.getFirst(function (err, displaySchema) {
             if (err) {
                 res.json(err);
             }
@@ -126,12 +131,5 @@ router.post('/', function(req, res) {
     }
 });
 
-
-
-router.get('/setup', function(err, data){
-    helpers.createDummyData().then(function(field){
-        console.log("Dummy Data created!");
-    });
-});
 
 module.exports = router;

@@ -1,7 +1,3 @@
-var q = require('q');
-var config = require('../config/config');
-var DisplaySchema = require('../models/displaySchema');
-
 module.exports.getKeys = function(obj){
     var keys = [];
     for(var key in obj){
@@ -24,28 +20,4 @@ module.exports.truncate = function(string, value){
         if(string.length>=value) truncated += "...";
         return truncated
     }
-};
-
-module.exports.createDummyData = function(){
-    var defer = q.defer();
-
-    var schema = {
-        Name: "Dummy",
-        brandTitle: "Tate Gallery",
-        brandUrl: "/img/logo.png",
-        collectionName: 'artworks',
-        title: "title",
-        thumbnail: "thumbnailUrl",
-        url: "url",
-        date: "dateText",
-        fullSize: "thumbnailUrl",
-        customFields: [],
-        footnote: "creditLine"
-    };
-
-    DisplaySchema.add(schema, function(err, schema){
-        defer.resolve(field);
-
-    });
-    return defer.promise;
 };
