@@ -16,6 +16,7 @@ var extJs = function(itemCount, displayMetaDataOnLightBox) {
             }
         });
 
+
         if ($('#collage').length > 0) {
 
             $('#load-more').click(function () {
@@ -25,6 +26,8 @@ var extJs = function(itemCount, displayMetaDataOnLightBox) {
             CreateMix(0);
         }
     });
+
+
 
 
 //setup before functions
@@ -128,4 +131,23 @@ var extJs = function(itemCount, displayMetaDataOnLightBox) {
             }
         });
     };
+};
+
+var bindColours = function(){
+    $(document).ready(function () {
+        var bgCol = $('#bgCol');
+        var fntCol = $('#fntCol');
+
+        if(bgCol) {
+            $('body').css('background-color', bgCol.val());
+            bgCol.on('keyup', function () {
+                $('body').css('background-color', bgCol.val());
+            });
+            $('body').css('color', fntCol.val());
+            fntCol.on('keyup', function () {
+                $('body').css('color', fntCol.val());
+            })
+        }
+    });
+
 };

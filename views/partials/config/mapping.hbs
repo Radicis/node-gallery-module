@@ -1,5 +1,7 @@
 <div class="row">
     <form action="/config/" method="post">
+        <h2>Configure Settings</h2>
+        <hr>
         <fieldset>
             <input type="hidden" name="_id" value="{{schema._id}}" />
             <div class="form-group row">
@@ -80,28 +82,44 @@
                 </div>
 
             </div>
+            <h2>Style Setup</h2>
             <hr>
-            <div class="row">
-                <div class="col-md-3 form-group">
-                    <label>Colour Scheme:</label><br>
-                    <label class="radio-inline"><input name="dark"  value="1" type="radio" {{#if schema.dark}}checked="checked"{{/if}}>Dark</label>
-                    <label class="radio-inline"> <input name="dark"  value="0" type="radio" {{#unless schema.dark}}checked="checked"{{/unless}}>Light</label>
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <label>Background Colour:</label>
+                    <input class="form-control" name="bgCol" id="bgCol"  value="{{schema.bgCol}}" type="text" />
+                    <p class="form-text text-muted">
+                        Css colour for the background. (Hex preceded by # or string)
+                    </p>
                 </div>
 
-                <div class="col-md-3 form-group">
-                    <label>Display Collection title:</label><br>
+                <div class="col-md-6">
+                    <label>Font Colour:</label>
+                    <input class="form-control" name="fntCol" id="fntCol"  value="{{schema.fntCol}}" type="text" />
+                    <p class="form-text text-muted">
+                        Css colour for the font.  (Hex preceded by # or string)
+                    </p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+
+                <div class="col-md-4 form-group">
+                    <label>Display Collection title</label><br>
                     <label class="radio-inline"><input name="showTitle"  value="1" type="radio" {{#if schema.showTitle}}checked="checked"{{/if}}>Yes</label>
                     <label class="radio-inline"> <input name="showTitle"  value="0" type="radio" {{#unless schema.showTitle}}checked="checked"{{/unless}}>No</label>
                 </div>
 
-                <div class="col-md-3 form-group">
-                    <label>Display Meta Data in Lightbox:</label><br>
+                <div class="col-md-4 form-group">
+                    <label>Display Meta Data in Lightbox</label><br>
                     <label class="radio-inline"><input name="showMeta"  value="1" type="radio" {{#if schema.showMeta}}checked="checked"{{/if}}>Yes</label>
                     <label class="radio-inline"><input name="showMeta"  value="0" type="radio" {{#unless schema.showMeta}}checked="checked"{{/unless}}>No</label>
                 </div>
 
-                <div class="col-md-3 form-group">
-                    <label>Display Control Buttons:</label><br>
+                <div class="col-md-4 form-group">
+                    <label>Display Control Buttons</label><br>
                     <label class="radio-inline"><input name="showButtons"  value="1" type="radio" {{#if schema.showButtons}}checked="checked"{{/if}}>Yes</label>
                     <label class="radio-inline"><input name="showButtons"  value="0" type="radio" {{#unless schema.showButtons}}checked="checked"{{/unless}}>No</label>
                 </div>
@@ -114,8 +132,11 @@
                 </div>
             </div>
 
+            <br>
+
         </fieldset>
     </form>
 </div>
+
 
 

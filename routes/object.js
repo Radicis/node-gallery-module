@@ -18,9 +18,7 @@ router.get('/random', function(req, res) {
                 res.json(err);
             }
 
-
             try {
-
                 var collection = db.collection(displaySchema.collectionName);
                 var count = collection.count();
                 var rand = Math.floor(Math.random() * count);
@@ -44,6 +42,8 @@ router.get('/random', function(req, res) {
                     context.showMeta = displaySchema.showMeta;
                     context.showTitle = displaySchema.showTitle;
                     context.itemCount = displaySchema.itemCount;
+                    context.bgCol = displaySchema.bgCol;
+                    context.fntCol = displaySchema.fntCol;
 
                     res.json(context);
                 });

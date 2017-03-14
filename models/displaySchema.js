@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var DisplaySchemaSchema = mongoose.Schema({
     schemaName:{
-      type: String
+        type: String
     },
     collectionName: {
         type: String
@@ -28,9 +28,13 @@ var DisplaySchemaSchema = mongoose.Schema({
     date: {
         type: String
     },
-    dark:{
-        type:Boolean,
-        default:true
+    bgCol:{
+        type:String,
+        default:"#222"
+    },
+    fntCol:{
+        type:String,
+        default:"#aaa"
     },
     showMeta:{
         type:Boolean,
@@ -70,7 +74,8 @@ module.exports.update = function(schema, callback){
         thumbnail: schema.thumbnail,
         fullSize: schema.fullSize,
         date: schema.date,
-        dark:schema.dark,
+        bgCol: schema.bgCol,
+        fntCol: schema.fntCol,
         showTitle: schema.showTitle,
         showMeta: schema.showMeta,
         showButtons: schema.showButtons,

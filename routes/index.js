@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var helpers = require('../middleware/helpers');
-var config = require('../config/config');
 var request = require('request');
 
 router.get('/', function(req, res) {
@@ -15,15 +14,17 @@ router.get('/', function(req, res) {
 
             var object = responseBody.object;
 
-            // get all relevant keys form the object to display as filters
+            // Get all relevant keys form the object to display as filters
             context.properties = helpers.getKeys(object);
 
             context.title = responseBody.collectionTitle;
-            context.dark = responseBody.dark;
+            context.bgCol = responseBody.bgCol;
+            context.fntCol = responseBody.fntCol;
             context.displayButtons = responseBody.showButtons;
             context.displayMetaDataOnLightBox = responseBody.showMeta;
             context.displayCollectionTitle  = responseBody.showTitle;
             context.itemCount = responseBody.itemCount;
+
             res.render('default', context);
         }
     });

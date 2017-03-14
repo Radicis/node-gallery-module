@@ -5,10 +5,9 @@ html {
 html, body {
     min-height: 100%;
     font-family: 'Roboto', sans-serif;
-    background-color:#fefefe;
     overflow:visible;
-    color: #555;
     overflow-x: hidden;
+    margin-top:10px;
 }
 
 a{
@@ -34,6 +33,13 @@ a{
 
 .fixed .buttons{
     clear:both;
+}
+
+
+#sample{
+    color:#222;
+    background-color:#aaa;
+    padding-bottom:5px;
 }
 
 #controls{

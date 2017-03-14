@@ -11,9 +11,12 @@
     <link rel="stylesheet" href="/css/vendor/bootstrap.min.css">
     <link rel="stylesheet" href="/css/main.css">
 
-    {{#if dark}}
-        <link rel="stylesheet" href="/css/dark.css">
-    {{/if}}
+    <style>
+        body{
+            background-color: {{bgCol}};
+            color: {{fntCol}};
+        }
+    </style>
 </head>
 <body>
 
@@ -25,7 +28,12 @@
 <script src="/js/vendor/mixitup.min.js"></script>
 <script src="/js/main.js"></script>
 <script>
-    extJs({{itemCount}}, {{displayMetaDataOnLightBox}});
+    {{#if itemCount}}
+        extJs({{itemCount}}, {{displayMetaDataOnLightBox}});
+    {{/if}}
+
+    bindColours();
+
 </script>
 </body>
 </html>
