@@ -1,10 +1,15 @@
-var extJs = function(itemCount, displayMetaDataOnLightBox) {
+
+// Contains the gallery loading functionality
+// Takes item count and displaymeta and baseurl params
+var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
 
     var count = itemCount;
+    // Set the search string to empty string to prevent null pointer
     var searchString = "";
 
     $(document).ready(function () {
 
+        // Bind the window scroll function to pop in fixed menu when threshold is reached
         $(window).scroll(function () {
             if ($(window).scrollTop() > 131) {
                 $('#controls').addClass('fixed');
@@ -16,7 +21,7 @@ var extJs = function(itemCount, displayMetaDataOnLightBox) {
             }
         });
 
-
+        // If the length of the loaded items is positive then apply the function to te load more button
         if ($('#collage').length > 0) {
 
             $('#load-more').click(function () {
@@ -27,30 +32,29 @@ var extJs = function(itemCount, displayMetaDataOnLightBox) {
         }
     });
 
-
-
-
-//setup before functions
-    var typingTimer;                //timer identifier
-    var doneTypingInterval = 1000;  //time in ms, 5 second for example
+    // Setup time variables
+    var typingTimer;
+    var doneTypingInterval = 1000;
     var $input = $('#search');
 
-//on keyup, start the countdown
+    // On keyup, start the countdown
     $input.on('keyup', function () {
         clearTimeout(typingTimer);
         typingTimer = setTimeout(doneTyping, doneTypingInterval);
     });
 
-//on keydown, clear the countdown
+    // On keydown, clear the countdown to prevent loading whie still typing
     $input.on('keydown', function () {
         clearTimeout(typingTimer);
     });
 
+    // Once typing complete, execute the createMix function
     var doneTyping = function () {
         searchString = $('#search').val();
         CreateMix();
     };
 
+    // Creates a new mix, erases existing items.
     var CreateMix = function () {
 
         var params = {
@@ -65,7 +69,7 @@ var extJs = function(itemCount, displayMetaDataOnLightBox) {
         Populate(params);
     };
 
-
+    // Appends to an existing mix
     var AppendMix = function () {
 
         var params = {
@@ -77,9 +81,10 @@ var extJs = function(itemCount, displayMetaDataOnLightBox) {
         Populate(params);
     };
 
+    // Populates the collage mix with items returned from API endpoing
     var Populate = function (params) {
 
-        $.post("http://localhost:3030/object", params, function (data) {
+        $.post(baseUrl + '/object', params, function (data) {
 
             var collage = $('#collage');
 
@@ -97,7 +102,7 @@ var extJs = function(itemCount, displayMetaDataOnLightBox) {
                 data.forEach(function (item) {
                     var html = '<a class="mix" data-date="' + item.date;
                     if (displayMetaDataOnLightBox == true) {
-                        html += '" data-title="' + item.title + ' - ' + item.date;
+                        html += '" data-title="' + item.title + ' - Acquired in ' + item.date;
                     }
                     html += '" data-lightbox="items" data-ref="item" data-lightbox="' + item._id + '"' +
                         ' href="' + item.thumbnail.slice(0, -5) + "10.jpg" + '"><img src="' +

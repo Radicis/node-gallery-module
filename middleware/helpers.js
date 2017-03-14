@@ -1,12 +1,4 @@
-module.exports.getKeys = function(obj){
-    var keys = [];
-    for(var key in obj){
-        if(key!='url' && key!='thumbnail')
-            keys.push(key);
-    }
-    return keys;
-};
-
+// Gets the fullsize image form tate gallery
 module.exports.getFullSizeImage = function(thumbnailUrl){
     if(thumbnailUrl === null || typeof thumbnailUrl === "undefined") {
         return "None";
@@ -14,6 +6,7 @@ module.exports.getFullSizeImage = function(thumbnailUrl){
     return thumbnailUrl.slice(0, -5) + "10.jpg";
 };
 
+// runcates a string based on a value
 module.exports.truncate = function(string, value){
     if(string != null && typeof string != "undefined") {
         truncated = string.substring(0, value);

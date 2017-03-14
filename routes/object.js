@@ -6,57 +6,6 @@ var DisplaySchema = require('../models/displaySchema');
 var mongoose = require('mongoose');
 var db = mongoose.connection;
 
-router.get('/random', function(req, res) {
-
-    var context = {};
-
-    try {
-        // Gets the first display schema from the collection to map the object properties and settings
-        DisplaySchema.getFirst(function (err, displaySchema) {
-
-            if (err) {
-                res.json(err);
-            }
-
-            try {
-                var collection = db.collection(displaySchema.collectionName);
-                var count = collection.count();
-                var rand = Math.floor(Math.random() * count);
-                collection.find({thumbnail: {$ne: ""}}, {limit: 1}).skip(rand).toArray(function (error, objects) {
-                    if (err) {
-                        throw err;
-                    }
-
-                    var object = objects[0];
-
-                    context.object = {
-                        title: object[displaySchema.title],
-                        thumbnail: object[displaySchema.thumbnail],
-                        url: object[displaySchema.url],
-                        date: object[displaySchema.date]
-                    };
-
-                    context.collectionTitle = displaySchema.collectionTitle;
-                    context.dark = displaySchema.dark;
-                    context.showButtons = displaySchema.showButtons;
-                    context.showMeta = displaySchema.showMeta;
-                    context.showTitle = displaySchema.showTitle;
-                    context.itemCount = displaySchema.itemCount;
-                    context.bgCol = displaySchema.bgCol;
-                    context.fntCol = displaySchema.fntCol;
-
-                    res.json(context);
-                });
-            }
-            catch(err){
-                res.json(err);
-            }
-        });
-    }
-    catch(err){
-        res.json(err);
-    }
-});
 
 router.post('/', function(req, res) {
     try {
@@ -66,7 +15,6 @@ router.post('/', function(req, res) {
             }
 
             try {
-
                 var count = parseInt(req.body.count);
                 var skip = parseInt(req.body.skip);
                 var search = req.body.search;
@@ -77,6 +25,10 @@ router.post('/', function(req, res) {
                 var date = displaySchema.date;
 
                 var collection = db.collection(displaySchema.collectionName);
+
+                // Find entries in the collection which match the search term
+                // The Computer property names map to the ones stored in the schema
+                // Shows in some editors as syntax error
                 collection.find({
                     $and: [{[thumbnail]: {$ne: null}}, {
                         $or: [
@@ -130,6 +82,5 @@ router.post('/', function(req, res) {
         res.json(err);
     }
 });
-
 
 module.exports = router;
