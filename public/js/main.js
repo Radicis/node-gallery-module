@@ -3,6 +3,11 @@
 // Takes item count and displaymeta and baseurl params
 var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
 
+    var collage = $('#collage');
+
+    // Store the maximum image width of the images in the collection
+    var maxImgWidth = 90000;
+
     var count = itemCount;
     // Set the search string to empty string to prevent null pointer
     var searchString = "";
@@ -13,16 +18,16 @@ var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
         $(window).scroll(function () {
             if ($(window).scrollTop() > 131) {
                 $('#controls').addClass('fixed');
-                $('#collage').addClass('margin-top');
+                collage.addClass('margin-top');
             }
             if ($(window).scrollTop() < 130 && $('#controls').hasClass('fixed')) {
                 $('#controls').removeClass('fixed');
-                $('#collage').removeClass('margin-top');
+                collage.removeClass('margin-top');
             }
         });
 
         // If the length of the loaded items is positive then apply the function to te load more button
-        if ($('#collage').length > 0) {
+        if (collage.length > 0) {
 
             $('#load-more').click(function () {
                 AppendMix();
@@ -30,7 +35,35 @@ var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
 
             CreateMix(0);
         }
+
+        updateImgWidth();
+
+        $(window).resize(function() {
+            updateImgWidth();
+        });
     });
+
+    var updateImgWidth = function(){
+
+        // If a fixed layout is selected then calculate the width of each image
+        if(collage.hasClass('fixedCollage')){
+
+            // Get the css col count property of the div
+            var colCount = parseInt(collage.css('column-count'));
+
+            //Calculate img width based on screen width and col count
+            var imgWidth = $(window).width()/colCount ;
+
+            $('.fixedCollage img').css('max-width', imgWidth + "px");
+
+            console.log("Max is: " + maxImgWidth*colCount + " and collage is: " + parseInt($('.fixedCollage').css('width')));
+
+            if((maxImgWidth>0) && (parseInt($('.fixedCollage').css('width'))>= maxImgWidth*colCount)){
+                $('.fixedCollage').css('max-width', maxImgWidth*colCount);
+                $('#filters').css('max-width', maxImgWidth*colCount);
+            }
+        }
+    };
 
     // Setup time variables
     var typingTimer;
@@ -43,7 +76,7 @@ var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
         typingTimer = setTimeout(doneTyping, doneTypingInterval);
     });
 
-    // On keydown, clear the countdown to prevent loading whie still typing
+    // On keydown, clear the countdown to prevent loading while still typing
     $input.on('keydown', function () {
         clearTimeout(typingTimer);
     });
@@ -81,7 +114,7 @@ var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
         Populate(params);
     };
 
-    // Populates the collage mix with items returned from API endpoing
+    // Populates the collage mix with items returned from API endpoint
     var Populate = function (params) {
 
         $.post(baseUrl + '/object', params, function (data) {
@@ -109,6 +142,14 @@ var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
                         item.thumbnail + '" data-bg="' + item.thumbnail +
                         '" data-title="' + item.title + '"/></a>';
                     collage.append(html);
+
+                    // Load the img thumbnail and determine smallest image and this the max img width value for this data set.
+                    var img = new Image();
+                    img.src = item.thumbnail;
+                    img.onload = function(){
+                        if(this.width<maxImgWidth)
+                            maxImgWidth = this.width;
+                    }
                 });
 
                 mixitup(container, {

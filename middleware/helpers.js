@@ -14,3 +14,7 @@ module.exports.truncate = function(string, value){
         return truncated
     }
 };
+
+module.exports.isFixedCollage = function(colCount){
+    return colCount >0 || false;
+};

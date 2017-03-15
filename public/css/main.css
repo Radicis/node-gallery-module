@@ -53,20 +53,28 @@ a{
     text-align: center;
 }
 
+.moveLeft{
+    margin-left:-30px;
+}
+
 #collage {
     line-height: 0;
-    -webkit-column-count: 12;
-    -webkit-column-gap:   0;
-    -moz-column-count:    12;
-    -moz-column-gap:      0;
-    column-count:         12;
-    column-gap:           0;
     overflow:visible;
-    margin-left:-30px;
+    margin-left:auto;
+    margin-right:auto;
     margin-top:20px;
     min-height:100px;
     transition:all, 0.5s ease-out;
     -webkit-transition:all, 0.5s ease-out;
+    -webkit-column-gap:   0;
+    -moz-column-gap:      0;
+    column-gap:           0;
+}
+
+.responsiveCollage{
+    -webkit-column-count: 12;
+    -moz-column-count:    12;
+    column-count:         12;
 }
 
 img{
@@ -109,11 +117,15 @@ img{
 }
 
 #collage img {
-    max-width:100px;
     border:0 solid transparent;
     background: transparent;
     z-index:99;
 }
+
+.responsiveCollage img{
+    max-width:100px;
+}
+
 
 #collage img:hover{
     transform: scale(1.5);
@@ -150,7 +162,7 @@ img{
    ========================================================================== */
 
 @media (max-width: 1300px) {
-    #collage {
+    .responsiveCollage {
         -moz-column-count:    12;
         -webkit-column-count: 12;
         column-count:         12;
@@ -158,7 +170,7 @@ img{
 }
 
 @media (max-width: 1000px) {
-    #collage {
+    .responsiveCollage {
         -moz-column-count:    9;
         -webkit-column-count: 9;
         column-count:         9;
@@ -166,7 +178,7 @@ img{
 }
 
 @media (max-width: 900px) {
-    #collage {
+    .responsiveCollage {
         -moz-column-count:    7;
         -webkit-column-count: 7;
         column-count:         7;
@@ -174,7 +186,7 @@ img{
 }
 
 @media (max-width: 700px) {
-    #collage {
+    .responsiveCollage {
         -moz-column-count:    6;
         -webkit-column-count: 6;
         column-count:         6;
@@ -182,7 +194,7 @@ img{
 }
 
 @media (max-width: 650px) {
-    #collage {
+    responsiveCollage {
         -moz-column-count:    5;
         -webkit-column-count: 5;
         column-count:         5;
@@ -194,7 +206,7 @@ img{
 }
 
 @media (max-width: 500px) {
-    #collage {
+    .responsiveCollage {
         -moz-column-count:    4;
         -webkit-column-count: 4;
         column-count:         4;
@@ -202,7 +214,7 @@ img{
 }
 
 @media (max-width: 400px) {
-    #collage {
+    .responsiveCollage {
         -moz-column-count:    3;
         -webkit-column-count: 3;
         column-count:         3;

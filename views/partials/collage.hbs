@@ -5,7 +5,7 @@
                 <h1>{{schema.collectionTitle}}</h1>
                 <span class="sub-heading">- Dynamic Search -</span>
             {{/if}}
-            <form class="filter" onsubmit="return false;">
+            <form class="filter" onsubmit="return false;" id="filters">
                 <input class="form-control" type="text" id="search" placeholder="Search.." />
                 {{#if schema.showButtons}}
                     <div class="buttons text-center">
@@ -16,11 +16,27 @@
                 {{/if}}
             </form>
         </div>
+        <div class="moveLeft">
+            {{#if (isFixedCollage schema.colCount)}}
 
-        <div class="container" data-ref="container" id="collage">
+                <div class="fixedCollage" data-ref="container" id="collage">
 
+                </div>
+                <style>
+                    .fixedCollage{
+                        -webkit-column-count: {{schema.colCount}};
+                        -moz-column-count:    {{schema.colCount}};
+                        column-count:         {{schema.colCount}};
+                    }
+                </style>
+            {{else}}
+                <div class="responsiveCollage" data-ref="container" id="collage">
+
+                </div>
+            {{/if}}
+
+
+            <button type="button" class="btn btn-default clearfix" id="load-more">More..</button>
         </div>
-
-        <button type="button" class="btn btn-default clearfix" id="load-more">More..</button>
     </div>
 </div>

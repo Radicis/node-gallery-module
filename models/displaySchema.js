@@ -51,6 +51,10 @@ var DisplaySchemaSchema = mongoose.Schema({
     itemCount:{
         type:Number,
         default:24
+    },
+    colCount:{
+        type:Number,
+        default: 0
     }
 });
 
@@ -79,7 +83,8 @@ module.exports.update = function(schema, callback){
         showTitle: schema.showTitle,
         showMeta: schema.showMeta,
         showButtons: schema.showButtons,
-        itemCount: schema.itemCount
+        itemCount: schema.itemCount,
+        colCount: schema.colCount
     }, { new: false }, callback);
 };
 

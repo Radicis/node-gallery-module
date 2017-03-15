@@ -32,7 +32,8 @@ router.post('/',function(req, res){
         itemCount: req.body.itemCount,
         showTitle: req.body.showTitle,
         bgCol: req.body.bgCol,
-        fntCol: req.body.fntCol
+        fntCol: req.body.fntCol,
+        colCount: req.body.colCount
     };
     // If an ID was passed then update instead of create
     if(req.body._id){
