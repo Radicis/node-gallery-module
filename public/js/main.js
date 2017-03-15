@@ -1,6 +1,6 @@
 
 // Contains the gallery loading functionality
-// Takes item count and displaymeta and baseurl params
+// Takes item count, a flag for displaying image data and baseurl string params
 var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
 
     var collage = $('#collage');
@@ -14,15 +14,16 @@ var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
 
     $(document).ready(function () {
 
+        // Initialize the tooltips for the filter buttons
+        $('[data-toggle="tooltip"]').tooltip({trigger : 'hover'});
+
         // Bind the window scroll function to pop in fixed menu when threshold is reached
         $(window).scroll(function () {
-            if ($(window).scrollTop() > 131) {
+            if ($(window).scrollTop() > 199) {
                 $('#controls').addClass('fixed');
-                collage.addClass('margin-top');
             }
-            if ($(window).scrollTop() < 130 && $('#controls').hasClass('fixed')) {
+            if ($(window).scrollTop() < 200) {
                 $('#controls').removeClass('fixed');
-                collage.removeClass('margin-top');
             }
         });
 
@@ -36,13 +37,13 @@ var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
             CreateMix(0);
         }
 
-        updateImgWidth();
-
+        // Bind the window resize event to update the images and collage container
         $(window).resize(function() {
             updateImgWidth();
         });
     });
 
+    // Updates the image and collage container widths
     var updateImgWidth = function(){
 
         // If a fixed layout is selected then calculate the width of each image
@@ -66,19 +67,20 @@ var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
     };
 
     // Setup time variables
-    var typingTimer;
-    var doneTypingInterval = 1000;
+    var timer;
+    // time to wait in ms before launching search
+    var time = 1000;
     var $input = $('#search');
 
-    // On keyup, start the countdown
+    // On keyup, start a timer
     $input.on('keyup', function () {
-        clearTimeout(typingTimer);
-        typingTimer = setTimeout(doneTyping, doneTypingInterval);
+        clearTimeout(timer);
+        timer = setTimeout(doneTyping, time);
     });
 
-    // On keydown, clear the countdown to prevent loading while still typing
+    // On keydown, clear the timer to prevent loading while still typing
     $input.on('keydown', function () {
-        clearTimeout(typingTimer);
+        clearTimeout(timer);
     });
 
     // Once typing complete, execute the createMix function
@@ -117,7 +119,7 @@ var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
     // Populates the collage mix with items returned from API endpoint
     var Populate = function (params) {
 
-        $.post(baseUrl + '/object', params, function (data) {
+        $.post(baseUrl + 'object', params, function (data) {
 
             var collage = $('#collage');
 
@@ -155,6 +157,7 @@ var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
 
                 });
 
+                // Create the mixitup object by calling the method on the container that was just created.
                 mixitup(container, {
                     animation: {
                         animateResizeContainer: false,
@@ -165,7 +168,7 @@ var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
 
             var loadMore = $('#load-more');
 
-
+            // If there are no items in the collectin then display nothing found
             if ($('#collage > a').length == 0) {
                 collage.html("<div>Nothing found</div>")
                 loadMore.fadeOut();
@@ -182,19 +185,23 @@ var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
     };
 };
 
+// Binds the font and bg colours on the config form to those of the related inputvalues
 var bindColours = function(){
     $(document).ready(function () {
         var bgCol = $('#bgCol');
         var fntCol = $('#fntCol');
+        var body = $('body');
 
+        // If the bgCol element is present (you are on te config page)
+        // then bind the key up events to reflect the value of that input field on the page
         if(bgCol) {
-            $('body').css('background-color', bgCol.val());
+            body.css('background-color', bgCol.val());
             bgCol.on('keyup', function () {
-                $('body').css('background-color', bgCol.val());
+                body.css('background-color', bgCol.val());
             });
-            $('body').css('color', fntCol.val());
+            body.css('color', fntCol.val());
             fntCol.on('keyup', function () {
-                $('body').css('color', fntCol.val());
+                body.css('color', fntCol.val());
             })
         }
     });

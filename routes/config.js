@@ -4,6 +4,7 @@ var DisplaySchema = require('../models/displaySchema');
 var middleware = require('../middleware/helpers');
 var config = require('../config/config');
 
+// Renders the schema config page
 router.get('/', function(req, res) {
     var context = {};
     DisplaySchema.getFirst(function(err, schema){
@@ -15,6 +16,7 @@ router.get('/', function(req, res) {
     });
 });
 
+// Route to update or create a new schema object
 router.post('/',function(req, res){
 
     var newSchema = {

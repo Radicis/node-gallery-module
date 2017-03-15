@@ -10,9 +10,9 @@
                     {{#if schema.showButtons}}
                         <input type="text" class="form-control" id="search" placeholder="Search.." />
                         <span class="input-group-btn">
-                            <button type="button" class="btn btn-secondary" data-sort="title:asc"><i class="glyphicon glyphicon-font"></i></button>
-                            <button type="button" class="btn btn-secondary" data-sort="date:asc"><i class="glyphicon glyphicon-time"></i></button>
-                            <button type="button" class="btn btn-secondary" data-sort="random"><i class="glyphicon glyphicon-random"></i></button>
+                            <button type="button" class="btn btn-secondary" data-toggle="tooltip" title="Sort By Title" data-sort="title:asc"><i class="glyphicon glyphicon-font"></i></button>
+                            <button type="button" class="btn btn-secondary" data-toggle="tooltip" title="Sort By Date" data-sort="date:asc"><i class="glyphicon glyphicon-time"></i></button>
+                            <button type="button" class="btn btn-secondary" data-toggle="tooltip" title="Random" data-sort="random"><i class="glyphicon glyphicon-random"></i></button>
                         </span>
                     {{else}}
                         <input type="text" class="form-control rounded" id="search" placeholder="Search.." />

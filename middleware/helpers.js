@@ -6,15 +6,7 @@ module.exports.getFullSizeImage = function(thumbnailUrl){
     return thumbnailUrl.slice(0, -5) + "10.jpg";
 };
 
-// runcates a string based on a value
-module.exports.truncate = function(string, value){
-    if(string != null && typeof string != "undefined") {
-        truncated = string.substring(0, value);
-        if(string.length>=value) truncated += "...";
-        return truncated
-    }
-};
-
+// Determines of the layout is fixed or not based on colCount comparision to zero
 module.exports.isFixedCollage = function(colCount){
     return colCount >0 || false;
 };

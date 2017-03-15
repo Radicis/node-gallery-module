@@ -6,7 +6,7 @@ var DisplaySchema = require('../models/displaySchema');
 var mongoose = require('mongoose');
 var db = mongoose.connection;
 
-
+// Returns a collection of objects based on count, skip and search params
 router.post('/', function(req, res) {
     try {
         DisplaySchema.getFirst(function (err, displaySchema) {
@@ -24,6 +24,7 @@ router.post('/', function(req, res) {
                 var thumbnail = displaySchema.thumbnail;
                 var date = displaySchema.date;
 
+                // Select the mongo db collection
                 var collection = db.collection(displaySchema.collectionName);
 
                 // Find entries in the collection which match the search term
