@@ -141,6 +141,7 @@ var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
                         ' href="' + item.thumbnail.slice(0, -5) + "10.jpg" + '"><img src="' +
                         item.thumbnail + '" data-bg="' + item.thumbnail +
                         '" data-title="' + item.title + '"/></a>';
+
                     collage.append(html);
 
                     // Load the img thumbnail and determine smallest image and this the max img width value for this data set.
@@ -149,7 +150,9 @@ var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
                     img.onload = function(){
                         if(this.width<maxImgWidth)
                             maxImgWidth = this.width;
-                    }
+                        updateImgWidth();
+                    };
+
                 });
 
                 mixitup(container, {

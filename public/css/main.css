@@ -24,22 +24,20 @@ a{
     clear:both;
 }
 
-.buttons{
-    margin-top:15px;
+
+#filters .form-control{
+    display:inline;
 }
 
 #controls{
     transition:all, 0.5s ease-out;
     -webkit-transition:all, 0.5s ease-out;
+    text-align: center;
 }
 
 .sub-heading{
     top: -15px;
     position: relative;
-}
-
-.filter .btn{
-    margin-top:-5px;
 }
 
 
@@ -53,9 +51,6 @@ a{
     text-align: center;
 }
 
-.moveLeft{
-    margin-left:-30px;
-}
 
 #collage {
     line-height: 0;
@@ -87,12 +82,37 @@ img{
     margin-top:180px;
 }
 
-.filters{
-    margin-right:10px;
+.moveLeft{
+    margin-left:-20px;
 }
 
-.filter .btn{
-    margin-right:10px;
+#filters{
+    margin:0 auto;
+}
+
+#filters .btn{
+    height:34px;
+    border-left:1px solid #aaa;
+    color:#aaa;
+}
+
+#filters .btn:first-of-type{
+    border:none;
+}
+
+#filters .btn:hover{
+    background-color: #ccc;
+    color:#444;
+}
+
+#filters .input-group{
+    width:100%;
+}
+
+.rounded{
+    border-radius: 4px 4px 4px 4px !important;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
 }
 
 .mix,
@@ -129,6 +149,7 @@ img{
 
 #collage img:hover{
     transform: scale(1.5);
+    -webkit-transform: scale(1.5);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
 }
 
@@ -138,6 +159,7 @@ img{
     padding:10px;
     z-index:9999;
     background:#222;
+    max-width:400px;
     top:2%;
     -webkit-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.75);
     -moz-box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.75);

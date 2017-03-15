@@ -6,14 +6,18 @@
                 <span class="sub-heading">- Dynamic Search -</span>
             {{/if}}
             <form class="filter" onsubmit="return false;" id="filters">
-                <input class="form-control" type="text" id="search" placeholder="Search.." />
-                {{#if schema.showButtons}}
-                    <div class="buttons text-center">
-                        <button type="button" class="btn btn-xs text-capitalize" data-sort="title:asc">Sort By Title</button>
-                        <button type="button" class="btn btn-xs text-capitalize" data-sort="date:asc">Sort By Date</button>
-                        <button type="button" class="btn btn-xs" data-sort="random">Randomize</button>
-                    </div>
-                {{/if}}
+                <div class="input-group">
+                    {{#if schema.showButtons}}
+                        <input type="text" class="form-control" id="search" placeholder="Search.." />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-secondary" data-sort="title:asc"><i class="glyphicon glyphicon-font"></i></button>
+                            <button type="button" class="btn btn-secondary" data-sort="date:asc"><i class="glyphicon glyphicon-time"></i></button>
+                            <button type="button" class="btn btn-secondary" data-sort="random"><i class="glyphicon glyphicon-random"></i></button>
+                        </span>
+                    {{else}}
+                        <input type="text" class="form-control rounded" id="search" placeholder="Search.." />
+                    {{/if}}
+                </div>
             </form>
         </div>
         <div class="moveLeft">
