@@ -19,6 +19,7 @@ router.get('/', function(req, res) {
 // Route to update or create a new schema object
 router.post('/',function(req, res){
 
+    // Create the schema object from the request body params
     var newSchema = {
         collectionName: req.body.collectionName,
         collectionTitle: req.body.collectionTitle,
@@ -37,6 +38,7 @@ router.post('/',function(req, res){
         fntCol: req.body.fntCol,
         colCount: req.body.colCount
     };
+
     // If an ID was passed then update instead of create
     if(req.body._id){
         newSchema._id = req.body._id;

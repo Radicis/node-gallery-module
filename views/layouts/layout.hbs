@@ -16,7 +16,6 @@
             background-color: {{schema.bgCol}};
             color: {{schema.fntCol}};
         }
-
     </style>
 </head>
 <body>
@@ -29,8 +28,9 @@
 <script src="/js/vendor/mixitup.min.js"></script>
 <script src="/js/main.js"></script>
 <script>
+    // Inline script loaded here to take in arguments from the express context into external javascript files
         {{#if schema}}
-        extJs({{schema.itemCount}}, {{schema.showMeta}}, "{{baseUrl}}");
+            extJs({{schema.itemCount}}, {{schema.showMeta}}, "{{baseUrl}}");
         {{/if}}
 
     // Set the background colors

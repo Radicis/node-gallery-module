@@ -16,6 +16,11 @@ a{
 }
 
 
+.moveLeft{
+    margin-left:-20px;
+}
+
+
 /* ==========================================================================
    Control styles
    ========================================================================== */
@@ -42,6 +47,53 @@ a{
 .sub-heading{
     top: -15px;
     position: relative;
+}
+
+
+#filters{
+    margin:0 auto;
+}
+
+#filters .btn{
+    height:34px;
+    border-left:1px solid #aaa;
+    color:#aaa;
+    line-height:13px;
+}
+
+#filters .btn:first-of-type{
+    border:none;
+}
+
+#filters .btn:hover{
+    background-color: #ccc;
+    color:#444;
+}
+
+#filters .btn:last-of-type{
+    border-radius: 0px 4px 4px 0px;
+    -moz-border-radius: 0px 4px 4px 0px;
+    -webkit-border-radius: 0px 4px 4px 0px;
+}
+
+#filters .input-group{
+    width:100%;
+}
+
+.rounded{
+    border-radius: 4px 4px 4px 4px !important;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+}
+
+
+#controls h1{
+    overflow:hidden;
+}
+
+.tooltip-inner{
+    opacity: 0.5;
+    color: #ccc;
 }
 
 
@@ -83,45 +135,6 @@ img{
     padding:0 !important;
 }
 
-.moveLeft{
-    margin-left:-20px;
-}
-
-#filters{
-    margin:0 auto;
-}
-
-#filters .btn{
-    height:34px;
-    border-left:1px solid #aaa;
-    color:#aaa;
-    line-height:13px;
-}
-
-#filters .btn:first-of-type{
-    border:none;
-}
-
-#filters .btn:hover{
-    background-color: #ccc;
-    color:#444;
-}
-
-#filters .btn:last-of-type{
-    border-radius: 0px 4px 4px 0px;
-    -moz-border-radius: 0px 4px 4px 0px;
-    -webkit-border-radius: 0px 4px 4px 0px;
-}
-
-#filters .input-group{
-    width:100%;
-}
-
-.rounded{
-    border-radius: 4px 4px 4px 4px !important;
-    -moz-border-radius: 4px 4px 4px 4px;
-    -webkit-border-radius: 4px 4px 4px 4px;
-}
 
 .mix,
 .gap {
@@ -154,31 +167,24 @@ img{
     max-width:100px;
 }
 
-#controls h1{
-    overflow:hidden;
-}
-
-.tooltip-inner{
-    opacity: 0.5;
-    color: #ccc;
-}
-
-
-
 #collage img:hover{
     transform: scale(1.5);
     -webkit-transform: scale(1.5);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
 }
 
+/* ==========================================================================
+   Fixed search menu
+   ========================================================================== */
 
 .fixed{
     position:fixed;
     padding:10px;
     z-index:9999;
     background:#222;
-    max-width:400px;
+    max-width:95%;
     top:2%;
+    left:2%;
     -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.75);
     -moz-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.75);
     box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.75);

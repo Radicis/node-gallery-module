@@ -5,6 +5,7 @@ var DisplaySchema = require('../models/displaySchema');
 
 router.get('/', function(req, res) {
 
+    // Get the first (there will only ever be one) schema to format the page initially
     DisplaySchema.getFirst(function (err, displaySchema){
 
         if(err){
@@ -14,6 +15,8 @@ router.get('/', function(req, res) {
         var context = {};
 
         context.schema = displaySchema;
+
+        // Get the server url from the config file
         context.baseUrl = config.baseUrl;
 
         res.render('default', context);

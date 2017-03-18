@@ -18,6 +18,8 @@ mongoose.connect(config.database, function(err, db) {
 
 var app = express();
 
+// Create the exress handlebars object
+// Pass in the helpers file to register all contained helpers
 var exhbs = hbs.create({
     helpers: helpers,
     extname: 'hbs',

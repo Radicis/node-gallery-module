@@ -9,6 +9,7 @@ var db = mongoose.connection;
 // Returns a collection of objects based on count, skip and search params
 router.post('/', function(req, res) {
     try {
+        // Load the schema which contains the property mapping
         DisplaySchema.getFirst(function (err, displaySchema) {
             if (err) {
                 res.json(err);
@@ -55,6 +56,7 @@ router.post('/', function(req, res) {
                     try {
                         var objects = [];
 
+                        // Iterate over all of the returned objects and, using the mapping provided by the schema, create the display object
                         dbObjects.forEach(function (dbObject) {
 
                             var object = {

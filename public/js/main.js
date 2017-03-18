@@ -134,6 +134,7 @@ var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
 
                 var container = document.querySelector('[data-ref="container"]');
 
+                // Iterate over the data collection returned and create a new a node for each item
                 data.forEach(function (item) {
                     var html = '<a class="mix" data-date="' + item.date;
                     if (displayMetaDataOnLightBox == true) {
@@ -144,6 +145,7 @@ var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
                         item.thumbnail + '" data-bg="' + item.thumbnail +
                         '" data-title="' + item.title + '"/></a>';
 
+                    // Attach the new node to the container
                     collage.append(html);
 
                     // Load the img thumbnail and determine smallest image and this the max img width value for this data set.
@@ -185,7 +187,7 @@ var extJs = function(itemCount, displayMetaDataOnLightBox, baseUrl) {
     };
 };
 
-// Binds the font and bg colours on the config form to those of the related inputvalues
+// Binds the font and bg colours on the config form to those of the related input values
 var bindColours = function(){
     $(document).ready(function () {
         var bgCol = $('#bgCol');
@@ -205,5 +207,4 @@ var bindColours = function(){
             })
         }
     });
-
 };
